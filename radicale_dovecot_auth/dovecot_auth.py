@@ -142,7 +142,7 @@ class DovecotAuth:
 
         if not self.buffer_is_empty:
             raise UnexpectedData(
-                    "Server send data that was not exptected: {}".format(
+                    "Server has sent data that was not expected: {}".format(
                         self.buffer))
 
         if command == b'OK':
