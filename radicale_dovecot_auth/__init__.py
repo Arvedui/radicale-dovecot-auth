@@ -45,6 +45,9 @@ class Auth(BaseAuth):
         return DovecotAuth(
                 self.configuration.get('auth', 'auth_socket'), SERVICE)
 
+    def is_authenticated(self, user, password):
+        return self.is_authenticated2(None, user, password)
+
     def is_authenticated2(self, login, user, password):
         conn = self.get_connection()
         return conn.authenticate(user, password)
