@@ -8,7 +8,7 @@ Installation
 
 .. code::
 
-        python3 -m pip install --upgrade git+https://github.com/Arvedui/radicale-dovecot-auth
+        pip3 install radicale-dovecot-auth
 
 
 Configuration
