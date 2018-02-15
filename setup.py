@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 import radicale_dovecot_auth
 
 setup(
-    name='radicale_docecot_auth',
+    name='radicale_dovecot_auth',
     version=radicale_dovecot_auth.__version__,
     description="Dovecot authentication plugin for Radicale",
     url='https://github.com/Arvedui/radicale-dovecot-auth',
