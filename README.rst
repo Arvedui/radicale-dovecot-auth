@@ -14,9 +14,23 @@ Installation
 Configuration
 =============
 
+Ensure that user running radicale has read and write permissions to the socket created by auth-userdb.
+
 .. code::
 
         [auth]
         type = radicale_dovecot_auth
 
-        auth_socket = path_to_socket
+        auth_socket = path_to_socket/auth-client
+
+A new socket can be added to Dovecot following the Dovecot auth_ schema for sasl authentication:
+
+.. _auth: https://wiki.dovecot.org/Services#auth
+
+.. code::
+
+        unix_listener auth-client {
+                mode = 0660
+                user = radicale
+                group = postfix
+        }
