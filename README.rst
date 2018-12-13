@@ -34,3 +34,13 @@ A new socket can be added to Dovecot following the Dovecot auth_ schema for sasl
                 user = radicale
                 group = postfix
         }
+        auth_socket = path_to_socket
+
+Authenticaiton Backend
+######################
+DovecotAuth provides authentication against a Dovecot authentication
+service using the PLAIN mechanism.
+
+Only version 1.1 as described in the `Dovecot Wiki`_
+
+.. _Dovecot Wiki: https://wiki2.dovecot.org/Design/AuthProtocol
