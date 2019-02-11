@@ -1,18 +1,25 @@
 #!/usr/bin/env python3
 
+import os.path
+
 from setuptools import setup
 
-import radicale_dovecot_auth
+FILEPATH = os.path.dirname(os.path.abspath(__file__))
+ABOUT_FILE_PATH = os.path.join(FILEPATH, 'radicale_dovecot_auth', '__about__.py')
+ABOUT = {}
+with open(ABOUT_FILE_PATH) as file_obj:
+    exec(file_obj.read(), ABOUT)
+
 
 setup(
         name='radicale_dovecot_auth',
-        version=radicale_dovecot_auth.__version__,
-        description="Dovecot authentication plugin for Radicale",
-        url='https://github.com/Arvedui/radicale-dovecot-auth',
-        author='Arvedui',
-        author_email='arvedui@posteo.de',
-        license="GNU GPL v3",
-        packages=["radicale_dovecot_auth"],
+        version=ABOUT['__version__'],
+        description=ABOUT['__summary__'],
+        url=ABOUT['__url__'],
+        author=ABOUT['__author__'],
+        author_email=ABOUT['__email__'],
+        license=ABOUT['__license__'],
+        packages=['radicale_dovecot_auth'],
         install_requires=['radicale'],
         classifiers=[
                 'Development Status :: 5 - Production/Stable',
