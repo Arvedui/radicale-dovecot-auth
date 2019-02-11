@@ -1,5 +1,5 @@
 # Dovecot authentication plugin for Radicale.
-# Copyright (C) 2017 Arvedui <arvedui@posteo.de>
+# Copyright (C) 2017-2019 Arvedui <arvedui@posteo.de>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
