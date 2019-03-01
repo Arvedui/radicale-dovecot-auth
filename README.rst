@@ -24,8 +24,8 @@ Ensure that user running radicale has read and write permissions to the socket c
         auth_socket = path_to_socket
 
         # or tcp based
-        host = localhost
-        port = 10000
+        auth_host = localhost
+        auth_port = 10000
 
 You may need to add a new auth_ socket to dovecot:
 
