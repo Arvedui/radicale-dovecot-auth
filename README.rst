@@ -21,22 +21,36 @@ Ensure that user running radicale has read and write permissions to the socket c
         [auth]
         type = radicale_dovecot_auth
 
-        auth_socket = path_to_socket/auth-client
+        auth_socket = path_to_socket
 
-A new socket can be added to Dovecot following the Dovecot auth_ schema for sasl authentication:
+        # or tcp based
+        host = localhost
+        port = 10000
+
+You may need to add a new auth_ socket to dovecot:
 
 .. _auth: https://wiki.dovecot.org/Services#auth
 
 .. code::
 
         unix_listener auth-client {
+                path = path_to_socket
                 mode = 0660
                 user = radicale
                 group = postfix
         }
-        auth_socket = path_to_socket
 
-Authenticaiton Backend
+Or tcp based:
+
+.. code::
+
+        inet_listener auth-client {
+                address = localhost
+                port = 10000
+        }
+
+
+Authentication Backend
 ######################
 DovecotAuth provides authentication against a Dovecot authentication
 service using the PLAIN mechanism.
