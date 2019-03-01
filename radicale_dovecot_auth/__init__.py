@@ -32,14 +32,26 @@ class Auth(BaseAuth):
     type = radicale_dovecot_auth
 
     auth_socket = path_to_socket
+
+    # or tcp based
+    host = example.com
+    port = 10000
     """
 
     def get_connection(self):
-        if not self.configuration.has_option('auth', 'auth_socket'):
-            raise RuntimeError('auth_socket path must be set')
+        kwargs = {}
+        if self.configuration.has_option('auth', 'auth_socket'):
+            kwargs['socket_path'] = self.configuration.get('auth', 'auth_socket')
 
-        return DovecotAuth(
-                self.configuration.get('auth', 'auth_socket'), SERVICE)
+        elif (self.configuration.has_option('auth', 'auth_host')
+              and self.configuration.has_option('auth', 'auth_port')):
+            kwargs['host'] = self.configuration.get('auth', 'auth_host')
+            kwargs['port'] = self.configuration.get('auth', 'auth_port')
+
+        else:
+            raise RuntimeError('auth_socket path or auth_host and auth_port must be set')
+
+        return DovecotAuth(SERVICE, **kwargs)
 
     def is_authenticated(self, user, password):
         return self.is_authenticated2(None, user, password)

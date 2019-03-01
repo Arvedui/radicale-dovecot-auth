@@ -51,18 +51,28 @@ class DovecotAuth:
 
     .. _Dovecot Wiki: https://wiki2.dovecot.org/Design/AuthProtocol
 
-    :param socket_path: Path to the unix domain socket of the auth server
     :param service: Name of the service authentication services are provided for
+    :param socket_path: Path to the unix domain socket of the auth server
+    :param host: hostname of the auth server
+    :param port: port of the auth server
     """
 
-    def __init__(self, socket_path, service):
+    def __init__(self, service, *,
+                 socket_path=None, host=None, port=None, ssl=False):
         self.socket_path = socket_path
         self.buffer = bytes()
         self.authid = 1
         self.service = service
 
-        self.socket = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-        self.socket.connect(self.socket_path)
+        if socket_path:
+            self.socket = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+            self.socket.connect(self.socket_path)
+
+        elif host and port:
+            self.socket = socket.create_connection((host, port))
+
+        else:
+            raise RuntimeError('auth_socket path or auth_host and auth_port must be set')
 
         self._handshake()
 
