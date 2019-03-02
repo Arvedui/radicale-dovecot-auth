@@ -24,7 +24,7 @@ __all__ = [
         ]
 
 
-__version__ = '0.2.2'
+__version__ = '0.3.0'
 __summary__ = 'Dovecot authentication plugin for Radicale'
 __url__ = 'https://github.com/Arvedui/radicale-dovecot-auth'
 __author__ = 'Arvedui'
