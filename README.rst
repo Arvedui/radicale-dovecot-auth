@@ -6,9 +6,28 @@ Dovecot authentication plugin for Radicale.
 Installation
 ============
 
+From Source
+-----------
+
 .. code::
 
         pip3 install radicale-dovecot-auth
+
+Debian
+------
+
+Packages are available here_
+
+.. _here: https://debs.slavino.sk/pool/main/r/radicale-dovecot-auth/
+
+Archlinux
+---------
+
+Packages are available in AUR for the `latest release`_ and current `master`_.
+
+.. _latest release: https://aur.archlinux.org/packages/radicale-dovecot-auth/
+.. _master: https://aur.archlinux.org/packages/radicale-dovecot-auth-git/
+
 
 
 Configuration
