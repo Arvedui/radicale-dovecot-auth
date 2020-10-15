@@ -68,6 +68,24 @@ Or tcp based:
                 port = 10000
         }
 
+When using socket authentication and systemd, check your radicale.service file. If it contains the following line (The default on Arch Linux contains this line):
+
+.. code::
+
+        RestrictAddressFamilies=~AF_PACKET AF_NETLINK AF_UNIX
+
+Then the radicale service can't connect to a unix socket. Change the service file with:
+
+.. code::
+
+        # systemctl edit radicale
+This opens the file /etc/systemd/system/radicale.service.d/override.conf in your text editor (creating it if necessary) and automatically reloads the unit when you are done editing. Add the following: 
+
+.. code::
+
+        [Service]
+        RestrictAddressFamilies=
+        RestrictAddressFamilies=~AF_PACKET AF_NETLINK
 
 Authentication Backend
 ######################
