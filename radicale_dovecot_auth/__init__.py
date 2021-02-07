@@ -45,6 +45,7 @@ class Auth(BaseAuth):
 
         with suppress(KeyError):
             kwargs['socket_path'] = self.configuration.get('auth', 'auth_socket')
+        with suppress(KeyError):
             kwargs['host'] = self.configuration.get('auth', 'auth_host')
             kwargs['port'] = self.configuration.get('auth', 'auth_port')
 
