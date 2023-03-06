@@ -67,7 +67,15 @@ class DovecotAuth:
         self.service = service
 
         if socket_path:
-            self.socket = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+            try:
+                self.socket = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+            except OSError as error:
+                e = sys.exc_info()[1]
+                assert e is not None
+                logger.error("Not enough permissions to create unix socket: %s",
+                         sys.exc_info()[1], exc_info=True)
+                raise error
+                
             try:
                 self.socket.connect(self.socket_path)
             except PermissionError:
