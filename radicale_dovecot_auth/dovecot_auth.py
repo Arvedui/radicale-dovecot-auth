@@ -15,8 +15,10 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from base64 import b64encode
+from radicale.log import logger
 import os
 import socket
+import sys
 
 HANDSHAKE = "VERSION\t1\t1\nCPID\t{}\n"
 SUPPORTED_MAJOR_VERSION = 1
@@ -65,8 +67,23 @@ class DovecotAuth:
         self.service = service
 
         if socket_path:
-            self.socket = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-            self.socket.connect(self.socket_path)
+            try:
+                self.socket = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+            except OSError as error:
+                e = sys.exc_info()[1]
+                assert e is not None
+                logger.error("Not enough permissions to create unix socket: %s",
+                         sys.exc_info()[1], exc_info=True)
+                raise error
+                
+            try:
+                self.socket.connect(self.socket_path)
+            except PermissionError:
+                e = sys.exc_info()[1]
+                assert e is not None
+                logger.error("Could not connect to %s: %s",
+                         self.socket_path, sys.exc_info()[1], exc_info=True)
+                raise error
 
         elif host and port:
             self.socket = socket.create_connection((host, port))
