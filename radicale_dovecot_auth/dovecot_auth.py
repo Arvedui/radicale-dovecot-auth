@@ -47,9 +47,9 @@ class DovecotAuth:
     DovecotAuth provides authentication against a Dovecot authentication
     service using the PLAIN mechanism.
 
-    Only version 1.1 as described in the `Dovecot Wiki`_
+    Only version 1.2 as described in the `Dovecot Wiki`_
 
-    .. _Dovecot Wiki: https://wiki2.dovecot.org/Design/AuthProtocol
+    .. _Dovecot Wiki: https://doc.dovecot.org/developer_manual/design/auth_protocol/
 
     :param service: Name of the service authentication services are provided for
     :param socket_path: Path to the unix domain socket of the auth server
